@@ -3,35 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caimperador <caimperador@student.42.fr>    +#+  +:+       +#+        */
+/*   By: cverissi <cverissi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 13:40:10 by cverissi          #+#    #+#             */
-/*   Updated: 2020/05/08 00:47:48 by caimperador      ###   ########.fr       */
+/*   Created: 2020/05/13 10:49:25 by cverissi          #+#    #+#             */
+/*   Updated: 2020/05/30 16:26:35 by cverissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	Description
+**	-----------
+**	From the string 's' returns a substring that begins at 'start'and
+**	has the maximum size of 'len'.
+**
+**	Parameters
+**	----------
+**	const char *s: the original string
+**	unsigned int start: the start of the substring inside the string *s.
+**	size_t len: max lenght of the substring
+**
+**	Returns
+**	-------
+**	The substring, NULL if allocation fails.
+*/
+
 #include "libft.h"
-
-int		ft_strlen(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*sub_str;
 
-	if (!s)
+	if (!(s))
 		return (NULL);
+	if (start > ft_strlen(s))
+		start = ft_strlen(s);
+	if (len > ft_strlen(s) - start)
+		len = (ft_strlen(s) - start);
+	i = start;
 	if (!(sub_str = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	i = start;
 	while (i < (start + len))
 	{
 		sub_str[i - start] = s[i];
